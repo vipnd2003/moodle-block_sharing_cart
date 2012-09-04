@@ -2,7 +2,7 @@
  *  Sharing Cart - Script
  *  
  *  @author  VERSION2, Inc.
- *  @version $Id: sharing_cart.js 540 2011-11-18 05:56:24Z malu $
+ *  @version $Id: sharing_cart.js 764 2012-07-04 09:20:58Z malu $
  */
 
 /**
@@ -173,13 +173,19 @@ function sharing_cart(params)
 	{
 		var board = create("div", null, { display: "none", verticalAlign: "middle" });
 		var outline = descendants(document.body, "h2", "outline").shift();
+		var content = descendants(document.body, "div", "course-content").shift();
+		var sitetopic = descendants(document.body, "div", "sitetopic").shift();
 		if (outline) {
-			// course
+			// course (Moodle 2.0 to 2.2)
 			outline.parentNode.insertBefore(board, outline.nextSibling);
-		} else {
+		} else if (content) {
+			// course (Moodle 2.3)
+			content.insertBefore(board, content.firstChild);
+		} else if (sitetopic) {
 			// frontpage
-			var sitetopic = descendants(document.body, "div", "sitetopic").shift();
 			sitetopic.insertBefore(board, sitetopic.firstChild);
+		} else {
+			// unknown...
 		}
 		
 		this.show = function (id)
@@ -208,15 +214,22 @@ function sharing_cart(params)
 		var target = null;
 		
 		var section = descendants(node, "ul", "section").shift();
+		var summary = children(node, "div", "summary").shift();
 		if (section) {
 			// activities exist -> append after them
 			target = create("li", { className: "activity" }, { display: "none" });
 			section.appendChild(target);
-		} else {
+		} else if (summary) {
 			// no activities -> insert after summary
 			target = create("div", { className: "activity" }, { display: "none" });
-			var summary = children(node, "div", "summary").shift();
 			node.insertBefore(target, summary.nextSibling);
+		} else {
+			// frontpage -> insert before menus
+			var menus = children(node, "div", "section_add_menus").shift();
+			var ul = create("ul", { className: "section" });
+			target = create("li", { className: "activity" }, { display: "none" });
+			ul.appendChild(target);
+			node.insertBefore(ul, menus);
 		}
 		descendants(node, "span", "commands").forEach(function (commands)
 		{
@@ -431,10 +444,21 @@ function sharing_cart(params)
 			sections.forEach(function (section) { section.hideTarget(); });
 			clipboard.hide();
 		});
-		descendants(document.body, "div", "section_add_menus").forEach(function (menu, i)
-		{
-			sections.push(new Section(menu.parentNode, i));
-		});
+		var choosers = descendants(document.body, "div", "addresourcemodchooser");
+		var menus = descendants(document.body, "div", "section_add_menus");
+		if (choosers.length) {
+			// Moodle 2.3
+			choosers.forEach(function (chooser, i)
+			{
+				sections.push(new Section(chooser.parentNode, i));
+			});
+		} else if (menus.length) {
+			// Moodle 2.0 to 2.2
+			menus.forEach(function (menu, i)
+			{
+				sections.push(new Section(menu.parentNode, i));
+			});
+		}
 		
 		// prepare folders
 		var cookie_dir = new Cookie("sharing_cart-dir");

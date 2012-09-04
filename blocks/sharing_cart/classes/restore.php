@@ -3,12 +3,13 @@
  *  Sharing Cart - Restore Implementation
  *  
  *  @author  VERSION2, Inc.
- *  @version $Id: restore.php 698 2012-04-26 03:24:55Z malu $
+ *  @version $Id: restore.php 767 2012-07-18 05:41:20Z malu $
  */
 
 namespace sharing_cart;
 
 require_once __DIR__.'/../../../backup/util/includes/restore_includes.php';
+require_once __DIR__.'/../../../backup/util/ui/renderer.php';
 
 require_once __DIR__.'/exception.php';
 require_once __DIR__.'/storage.php';
@@ -112,6 +113,7 @@ class restore
 		$cms = $GLOBALS['DB']->get_records_select('course_modules', "id $sql", $params);
 		foreach ($cms as $cm)
 			\moveto_module($cm, $this->section);
+		\rebuild_course_cache($this->course->id);
 	}
 	
 	private function copy_archive_to_tempdir($filename)
@@ -191,8 +193,12 @@ class restore
 	private $course, $section, $context, $tempfiles;
 }
 
-class stage_confirm_hook_renderer
+class stage_confirm_hook_renderer extends \core_backup_renderer
 {
+	public function __construct()
+	{
+		/* Do Nothing */
+	}
 	public function backup_details($details, \moodle_url $url)
 	{
 		$this->filepath = $url->param('filepath');
