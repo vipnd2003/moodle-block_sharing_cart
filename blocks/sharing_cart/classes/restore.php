@@ -3,7 +3,7 @@
  *  Sharing Cart - Restore Implementation
  *  
  *  @author  VERSION2, Inc.
- *  @version $Id: restore.php 767 2012-07-18 05:41:20Z malu $
+ *  @version $Id: restore.php 785 2012-09-11 09:01:38Z malu $
  */
 
 namespace sharing_cart;
@@ -199,7 +199,7 @@ class stage_confirm_hook_renderer extends \core_backup_renderer
 	{
 		/* Do Nothing */
 	}
-	public function backup_details($details, \moodle_url $url)
+	public function backup_details($details, $url)
 	{
 		$this->filepath = $url->param('filepath');
 	}

@@ -3,7 +3,7 @@
  *  Sharing Cart - Backup Operation
  *  
  *  @author  VERSION2, Inc.
- *  @version $Id: backup.php 698 2012-04-26 03:24:55Z malu $
+ *  @version $Id: backup.php 785 2012-09-11 09:01:38Z malu $
  */
 
 require_once '../../config.php';
@@ -39,6 +39,9 @@ try {
 	
 	redirect($return_to);
 } catch (Exception $ex) {
-	//print_error('err:backup', 'block_sharing_cart', $return_to);
-	error($ex->__toString()); // デバッグ用に詳細メッセージを表示
+	if (!empty($CFG->debug) and $CFG->debug >= DEBUG_DEVELOPER) {
+		print_error('notlocalisederrormessage', 'error', '', $ex->__toString());
+	} else {
+		print_error('err:backup', 'block_sharing_cart', $return_to);
+	}
 }

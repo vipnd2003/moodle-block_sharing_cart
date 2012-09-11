@@ -3,7 +3,7 @@
  *  Sharing Cart - Move Directory Operation
  *  
  *  @author  VERSION2, Inc.
- *  @version $Id: movedir.php 540 2011-11-18 05:56:24Z malu $
+ *  @version $Id: movedir.php 785 2012-09-11 09:01:38Z malu $
  */
 
 require_once '../../config.php';
@@ -47,6 +47,9 @@ try {
 	
 	redirect($return_to);
 } catch (Exception $ex) {
-	//print_error('err:move', 'block_sharing_cart', $return_to);
-	error($ex->__toString());
+	if (!empty($CFG->debug) and $CFG->debug >= DEBUG_DEVELOPER) {
+		print_error('notlocalisederrormessage', 'error', '', $ex->__toString());
+	} else {
+		print_error('err:move', 'block_sharing_cart', $return_to);
+	}
 }

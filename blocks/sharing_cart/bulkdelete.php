@@ -3,7 +3,7 @@
  *  Sharing Cart - Bulk Delete Operation
  *  
  *  @author  VERSION2, Inc.
- *  @version $Id: bulkdelete.php 544 2011-12-09 07:26:15Z malu $
+ *  @version $Id: bulkdelete.php 785 2012-09-11 09:01:38Z malu $
  */
 
 require_once '../../config.php';
@@ -49,8 +49,11 @@ if (is_array($delete_param)) try {
 	
 	redirect($return_to);
 } catch (Exception $ex) {
-	//print_error('err:delete', 'block_sharing_cart', $return_to);
-	error($ex->__toString());
+	if (!empty($CFG->debug) and $CFG->debug >= DEBUG_DEVELOPER) {
+		print_error('notlocalisederrormessage', 'error', '', $ex->__toString());
+	} else {
+		print_error('err:delete', 'block_sharing_cart', $return_to);
+	}
 }
 
 $orderby = 'tree,weight,modtext';
