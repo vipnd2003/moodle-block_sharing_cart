@@ -1,7 +1,18 @@
 Sharing Cart 2
 ==============
 
-version 2.2, release 1 patch 3 - 2012.09.11
+version 2.3, release candidate 1 - 2012.09.13
+
+The "master" branch is no longer compatible with Moodle 2.2 or earlier.
+If you have Moodle 2.2 installed, checkout "moodle-2.2" branch instead.
+
+
+Change Log
+----------
+
+* 2.3, release candidate 1
+  * New feature: Option to copy with user data (for Wiki, Forum, Database, etc.)
+  * Improvement: Ajaxify
 
 
 Purpose
@@ -19,7 +30,7 @@ serving as a library of frequently used course items available for duplication.
 Requirements
 ------------
 
-Moodle 2.0 to 2.3
+Moodle 2.3.1 or later
 
 
 License

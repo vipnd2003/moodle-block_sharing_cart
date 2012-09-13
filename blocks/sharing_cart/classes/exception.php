@@ -1,13 +1,15 @@
 <?php
 /**
- *  Sharing Cart - Exceptions
+ *  Sharing Cart
  *  
  *  @author  VERSION2, Inc.
- *  @version $Id: exception.php 503 2011-07-20 07:11:19Z malu $
+ *  @version $Id: exception.php 776 2012-09-05 10:16:15Z malu $
  */
-
 namespace sharing_cart;
 
+/**
+ *  Sharing Cart exception
+ */
 class exception extends \moodle_exception
 {
 	/**

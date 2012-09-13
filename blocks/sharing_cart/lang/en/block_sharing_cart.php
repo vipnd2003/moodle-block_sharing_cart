@@ -9,17 +9,20 @@ $string['copyhere'] = 'Copy here';
 $string['notarget'] = 'Target not found';
 $string['clipboard'] = 'Copying this shared item';
 $string['bulkdelete'] = 'Bulk delete';
-$string['confirm_backup'] = 'Are you sure you want to copy to Sharing Cart?';
-$string['confirm_restore'] = 'Are you sure you want to copy to course?';
+$string['confirm_backup'] = 'Do you want to copy this activity into Sharing Cart?';
+$string['confirm_userdata'] = 'Do you want to include user data in a copy of this activity?';
+$string['confirm_restore'] = 'Do you want to copy this item to course?';
 $string['confirm_delete'] = 'Are you sure you want to delete?';
 $string['confirm_delete_selected'] = 'Are you sure you want to delete all selected items?';
 $string['download'] = 'Download';
 
-$string['conf_plugins_heading'] = 'Plugin settings';
-$string['conf_plugins_nothing'] = 'There\'s no plugins to configure.';
-$string['conf_plugins_enabled_head'] = 'Enabled plugins';
-$string['conf_plugins_enabled_desc'] = 'Select plugins you want to use. Click with CTRL to select multiple item.';
+$string['conf:userdata_copyable_modtypes'] = 'User data copyable module types';
+$string['conf:userdata_copyable_modtypes_desc'] = 'While copying an activity into the Sharing Cart,
+a dialog shows to be chosen whether a copy of an activity includes its user data or not,
+if its module type is checked in the above and an operator has <strong>moodle/backup:userinfo</strong> capability.
+(By default, only manager role has <strong>moodle/backup:userinfo</strong> capability.)';
 
+$string['err:invalid'] = 'An invalid operation detected';
 $string['err:record_id'] = 'Shared item ID was incorrect (not found)';
 $string['err:course_id'] = 'Course ID was incorrect (not found)';
 $string['err:section_id'] = 'Section ID was incorrect (not found)';
@@ -32,8 +35,7 @@ $string['err:delete'] = 'An error occurred while deleting shared item';
 $string['err:record'] = 'An error occurred while operating data record';
 $string['err:tempdir'] = 'An error occurred while creating temporary directory';
 $string['err:cleanup'] = 'An error occurred while cleaning up temporary data';
-
-$string['err:not_implemented'] = 'Specified module does not support backup function';
+$string['err:unsupported'] = 'Specified module does not support backup function';
 
 $string['sharing_cart'] = $string['pluginname'];
 $string['sharing_cart_help'] = file_get_contents(__DIR__.'/help/sharing_cart.html');

@@ -3,17 +3,17 @@
  *  Sharing Cart - Bulk Delete Operation
  *  
  *  @author  VERSION2, Inc.
- *  @version $Id: bulkdelete.php 785 2012-09-11 09:01:38Z malu $
+ *  @version $Id: bulkdelete.php 799 2012-09-13 07:53:58Z malu $
  */
 
 require_once '../../config.php';
 
-require_once './classes/storage.php';
-require_once './classes/record.php';
-require_once './classes/view.php';
+require_once __DIR__.'/classes/storage.php';
+require_once __DIR__.'/classes/record.php';
+require_once __DIR__.'/classes/renderer.php';
 
 $course_id = required_param('course', PARAM_INT);
-$return_to = $CFG->wwwroot.'/course/view.php?id='.$course_id;
+$return_to = new moodle_url('/course/view.php', array('id' => $course_id));
 
 require_login($course_id);
 
@@ -23,8 +23,6 @@ $delete_param = function_exists('optional_param_array')
 if (is_array($delete_param)) try {
 	
 	set_time_limit(0);
-	
-	$notifications = array();
 	
 	$delete_ids = array_map('intval', array_keys($delete_param));
 	
@@ -36,24 +34,21 @@ if (is_array($delete_param)) try {
 	
 	$storage = new sharing_cart\storage();
 	
-	$delete_ids = array();
+	$deleted_ids = array();
 	foreach ($records as $record) {
 		$storage->delete($record->filename);
-		$delete_ids[] = $record->id;
+		$deleted_ids[] = $record->id;
 	}
 	
-	list ($sql, $params) = $DB->get_in_or_equal($delete_ids);
+	list ($sql, $params) = $DB->get_in_or_equal($deleted_ids);
 	$DB->delete_records_select(sharing_cart\record::TABLE, "id $sql", $params);
 	
 	sharing_cart\record::renumber($USER->id);
 	
 	redirect($return_to);
 } catch (Exception $ex) {
-	if (!empty($CFG->debug) and $CFG->debug >= DEBUG_DEVELOPER) {
-		print_error('notlocalisederrormessage', 'error', '', $ex->__toString());
-	} else {
-		print_error('err:delete', 'block_sharing_cart', $return_to);
-	}
+	//print_error('err:delete', 'block_sharing_cart', $return_to);
+	error($ex->__toString());
 }
 
 $orderby = 'tree,weight,modtext';
@@ -65,7 +60,7 @@ $items = $DB->get_records(sharing_cart\record::TABLE, array('userid' => $USER->i
 
 $title = get_string('bulkdelete', 'block_sharing_cart');
 
-$PAGE->set_url($CFG->wwwroot.'/blocks/sharing_cart/bulkdelete.php?course='.$course_id);
+$PAGE->set_url('/blocks/sharing_cart/bulkdelete.php', array('course' => $course_id));
 $PAGE->set_title($title);
 $PAGE->set_heading($title);
 $PAGE->navbar->add($title, '');
@@ -125,7 +120,7 @@ echo $OUTPUT->header();
 			}
 		//]]>
 		</script>
-		<form action="', $CFG->wwwroot.'/blocks/sharing_cart/bulkdelete.php"
+		<form action="', new moodle_url('/blocks/sharing_cart/bulkdelete.php'), '"
 		 method="post" id="form" onsubmit="return confirm_delete_selected();">
 		<div style="display:none;">
 			<input type="hidden" name="course" value="', $course_id, '" />
@@ -144,7 +139,7 @@ echo $OUTPUT->header();
 			<li style="list-style-type:none; clear:left;">
 				<input type="checkbox" name="delete['.$id.']" checked="checked" onclick="check();"
 				 style="float:left; height:16px;" id="delete_'.$id.'" />
-				<div style="float:left;">', sharing_cart\view\icon($item), '</div>
+				<div style="float:left;">', sharing_cart\renderer::render_modicon($item), '</div>
 				<div style="float:left;">
 					<label for="delete_'.$id.'">', $item->modtext, '</label>
 				</div>
