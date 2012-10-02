@@ -30,7 +30,7 @@ serving as a library of frequently used course items available for duplication.
 Requirements
 ------------
 
-Moodle 2.3.1 or later
+Moodle 2.3.1 or later, with AJAX enabled
 
 
 License
