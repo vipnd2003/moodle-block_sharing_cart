@@ -21,6 +21,12 @@ $string['conf:userdata_copyable_modtypes_desc'] = '共有カートへコピー�
 かつ、操作しているユーザーが <strong>moodle/backup:userinfo</strong> ケイパビリティを持っていれば、
 そのモジュールに付随するユーザーデータをコピーに含めるかどうかを選択するダイアログを表示します。<br />
 (既定では「マネージャ」ロールのみが <strong>moodle/backup:userinfo</strong> ケイパビリティを持ちます。)';
+$string['conf:workaround_qtypes'] = 'リストア不具合対策を行う問題タイプ';
+$string['conf:workaround_qtypes_desc'] = 'チェックを付けた問題タイプに対して、リストア不具合対策を行います。
+これを有効にすると、リストアしようとしている問題と全く同じ問題が既に存在していて、
+しかしながらそのデータに破損が見つかった場合、既存データの再利用を避け、
+その問題を再度リストアするように試みます。この対策は、
+<i>error_question_match_sub_missing_in_db</i> などのエラー回避に有用です。';
 
 $string['err:invalid'] = '無効な操作です';
 $string['err:record_id'] = '不正な共有アイテムIDです';
@@ -36,6 +42,7 @@ $string['err:record'] = 'DBアクセス時にエラーが発生しました';
 $string['err:tempdir'] = '一時ディレクトリの作成に失敗しました';
 $string['err:cleanup'] = 'クリーンアップ時にエラーが発生しました';
 $string['err:unsupported'] = 'バックアップをサポートしていないモジュールです';
+$string['err:requireajax'] = 'Sharing Cart requires AJAX';
 
 $string['sharing_cart'] = $string['pluginname'];
 $string['sharing_cart_help'] = file_get_contents(__DIR__.'/help/sharing_cart.html');

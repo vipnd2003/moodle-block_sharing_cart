@@ -18,9 +18,14 @@ $string['download'] = 'Download';
 
 $string['conf:userdata_copyable_modtypes'] = 'User data copyable module types';
 $string['conf:userdata_copyable_modtypes_desc'] = 'While copying an activity into the Sharing Cart,
-a dialog shows to be chosen whether a copy of an activity includes its user data or not,
+a dialog shows an option whether a copy of an activity includes its user data or not,
 if its module type is checked in the above and an operator has <strong>moodle/backup:userinfo</strong> capability.
 (By default, only manager role has <strong>moodle/backup:userinfo</strong> capability.)';
+$string['conf:workaround_qtypes'] = 'Workaround for question types';
+$string['conf:workaround_qtypes_desc'] = 'The workaround for question restore issue will be performed if its question type is checked.
+When the questions to be restored already exist, however, those data look like inconsistent,
+this workaround will try to make another duplicates instead of reusing existing data.
+It may be useful for avoiding some restore errors, such as <i>error_question_match_sub_missing_in_db</i>.';
 
 $string['err:invalid'] = 'An invalid operation detected';
 $string['err:record_id'] = 'Shared item ID was incorrect (not found)';
@@ -36,6 +41,7 @@ $string['err:record'] = 'An error occurred while operating data record';
 $string['err:tempdir'] = 'An error occurred while creating temporary directory';
 $string['err:cleanup'] = 'An error occurred while cleaning up temporary data';
 $string['err:unsupported'] = 'Specified module does not support backup function';
+$string['err:requireajax'] = 'Sharing Cart requires AJAX';
 
 $string['sharing_cart'] = $string['pluginname'];
 $string['sharing_cart_help'] = file_get_contents(__DIR__.'/help/sharing_cart.html');

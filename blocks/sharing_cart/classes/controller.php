@@ -3,7 +3,7 @@
  *  Sharing Cart
  *  
  *  @author  VERSION2, Inc.
- *  @version $Id: controller.php 799 2012-09-13 07:53:58Z malu $
+ *  @version $Id: controller.php 882 2012-11-01 05:06:21Z malu $
  */
 namespace sharing_cart;
 
@@ -203,6 +203,7 @@ class controller
 		global $CFG, $DB, $USER;
 		
 		require_once __DIR__.'/../../../backup/util/includes/restore_includes.php';
+		require_once __DIR__.'/../backup/util/helper/restore_fix_missings_helper.php';
 		
 		// cleanup temporary files when we exit this scope
 		$tempfiles = array();
@@ -247,6 +248,9 @@ class controller
 		foreach ($controller->get_plan()->get_tasks() as $task) {
 			if ($task->setting_exists('overwrite_conf'))
 				$task->get_setting('overwrite_conf')->set_value(false);
+		}
+		if (get_config('block_sharing_cart', 'workaround_qtypes')) {
+			\restore_fix_missings_helper::fix_plan($controller->get_plan());
 		}
 		$controller->set_status(\backup::STATUS_AWAITING);
 		$controller->execute_plan();
@@ -395,10 +399,12 @@ class controller
 		global $CFG;
 		if (file_exists("$CFG->dirroot/mod/$cm->modname/lib.php")) {
 			include_once"$CFG->dirroot/mod/$cm->modname/lib.php";
-			$info = call_user_func("{$cm->modname}_get_coursemodule_info", $cm);
-			if ($info->icon && !$info->iconcomponent)
-				return $info->icon;
-			// TODO: add a field for iconcomponent to block_sharing_cart table?
+			if (function_exists("{$cm->modname}_get_coursemodule_info")) {
+				$info = call_user_func("{$cm->modname}_get_coursemodule_info", $cm);
+				if (!empty($info->icon) && empty($info->iconcomponent))
+					return $info->icon;
+				// TODO: add a field for iconcomponent to block_sharing_cart table?
+			}
 		}
 		return '';
 	}

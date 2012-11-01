@@ -3,7 +3,7 @@
  *  Sharing Cart - REST API
  *  
  *  @author  VERSION2, Inc.
- *  @version $Id: rest.php 791 2012-09-12 11:00:15Z malu $
+ *  @version $Id: rest.php 859 2012-10-12 06:31:50Z malu $
  */
 
 require_once '../../config.php';

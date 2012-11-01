@@ -3,7 +3,7 @@
  *  Sharing Cart - Bulk Delete Operation
  *  
  *  @author  VERSION2, Inc.
- *  @version $Id: bulkdelete.php 799 2012-09-13 07:53:58Z malu $
+ *  @version $Id: bulkdelete.php 841 2012-10-05 06:09:08Z malu $
  */
 
 require_once '../../config.php';

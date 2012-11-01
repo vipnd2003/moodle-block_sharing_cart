@@ -1,7 +1,7 @@
 Sharing Cart 2
 ==============
 
-version 2.3, release candidate 1 - 2012.09.13
+version 2.3, release 2 - 2012.11.01
 
 The "master" branch is no longer compatible with Moodle 2.2 or earlier.
 If you have Moodle 2.2 installed, checkout "moodle-2.2" branch instead.
@@ -10,6 +10,10 @@ If you have Moodle 2.2 installed, checkout "moodle-2.2" branch instead.
 Change Log
 ----------
 
+* 2.3, release 2
+  * New feature: Workaround for question bank restore issue (error_question_match_sub_missing_in_db)
+* 2.3, release 1
+  * Some minor fixes
 * 2.3, release candidate 1
   * New feature: Option to copy with user data (for Wiki, Forum, Database, etc.)
   * Improvement: Ajaxify
