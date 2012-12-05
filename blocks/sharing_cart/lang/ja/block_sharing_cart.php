@@ -1,6 +1,7 @@
-<?php
+<?php // $Id: block_sharing_cart.php 905 2012-12-05 05:36:52Z malu $
 
 $string['pluginname'] = '共有カート';
+$string['sharing_cart:addinstance'] = '新しい共有カートブロックを追加する';
 
 $string['backup'] = '共有カートへコピー';
 $string['restore'] = 'コースへコピー';

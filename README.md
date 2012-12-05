@@ -1,7 +1,7 @@
 Sharing Cart 2
 ==============
 
-version 2.3, release 2 - 2012.11.01
+version 2.4, release 1 - 2012.12.05
 
 The "master" branch is no longer compatible with Moodle 2.2 or earlier.
 If you have Moodle 2.2 installed, checkout "moodle-2.2" branch instead.
@@ -10,6 +10,8 @@ If you have Moodle 2.2 installed, checkout "moodle-2.2" branch instead.
 Change Log
 ----------
 
+* 2.4, release 1
+  * Support Moodle 2.4
 * 2.3, release 2
   * New feature: Workaround for question bank restore issue (error_question_match_sub_missing_in_db)
 * 2.3, release 1

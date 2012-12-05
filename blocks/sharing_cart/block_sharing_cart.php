@@ -1,9 +1,9 @@
 <?php
 /**
- *  Sharing Cart - Block
+ *  Sharing Cart block
  *  
  *  @author  VERSION2, Inc.
- *  @version $Id: block_sharing_cart.php 882 2012-11-01 05:06:21Z malu $
+ *  @version $Id: block_sharing_cart.php 905 2012-12-05 05:36:52Z malu $
  */
 
 require_once __DIR__.'/classes/controller.php';
@@ -13,25 +13,29 @@ class block_sharing_cart extends block_base
 	public function init()
 	{
 		$this->title   = get_string('pluginname', __CLASS__);
-		$this->version = 2012110100;
+		$this->version = 2012120500;
 	}
-	
+
 	public function applicable_formats()
 	{
 		return array('course' => true);
 	}
-	
+
+	public function has_config()
+	{
+		return true;
+	}
+
 	/**
 	 *  Get the block content
 	 *  
 	 *  @global object $CFG
 	 *  @global object $USER
-	 *  @global moodle_page $PAGE
 	 *  @return object|string
 	 */
 	public function get_content()
 	{
-		global $CFG, $USER, $PAGE;
+		global $CFG, $USER;
 		
 		if ($this->content !== null)
 			return $this->content;
@@ -50,16 +54,24 @@ class block_sharing_cart extends block_base
 			$html = $this->get_content_noajax();
 		}
 		
-		$PAGE->requires->js('/blocks/sharing_cart/block_sharing_cart.js');
-		$PAGE->requires->yui_module('block_sharing_cart', 'M.block_sharing_cart.init', array(), null, true);
+		$this->page->requires->js('/blocks/sharing_cart/module.js');
+		$this->page->requires->yui_module('block_sharing_cart', 'M.block_sharing_cart.init', array(), null, true);
+		$this->page->requires->strings_for_js(
+			array('yes', 'no', 'ok', 'cancel', 'error', 'edit', 'move', 'delete', 'movehere'),
+			'moodle'
+			);
+		$this->page->requires->strings_for_js(
+			array('copyhere', 'notarget', 'backup', 'restore', 'movedir', 'clipboard',
+			      'confirm_backup', 'confirm_userdata', 'confirm_delete'),
+			__CLASS__
+			);
 		
 		$footer = '<div style="display:none;">'
 		        . '<div class="header-commands">' . $this->get_header() . '</div>'
-		        . '<form name="strings">' . $this->get_hidden_strings() . '</form>'
 		        . '</div>';
 		return $this->content = (object)array('text' => $html, 'footer' => $footer);
 	}
-	
+
 	/**
 	 *  Get the block header
 	 *  
@@ -83,7 +95,7 @@ class block_sharing_cart extends block_base
 		
 		return $bulkdelete . $helpicon;
 	}
-	
+
 	/**
 	 *  Get the block content for no-AJAX
 	 *  
@@ -101,35 +113,5 @@ class block_sharing_cart extends block_base
 			$html .= '<div>' . $OUTPUT->rarrow() . ' ' . $link . '</div>';
 		}
 		return $html;
-	}
-	
-	private function get_hidden_strings()
-	{
-		$params = array(
-			'yes'              => get_string('yes'),
-			'no'               => get_string('no'),
-			'ok'               => get_string('ok'),
-			'cancel'           => get_string('cancel'),
-			'error'            => get_string('error'),
-			'edit'             => get_string('edit'),
-			'move'             => get_string('move'),
-			'delete'           => get_string('delete'),
-			'movehere'         => get_string('movehere'),
-			'copyhere'         => get_string('copyhere', __CLASS__),
-			'notarget'         => get_string('notarget', __CLASS__),
-			'backup'           => get_string('backup', __CLASS__),
-			'restore'          => get_string('restore', __CLASS__),
-			'movedir'          => get_string('movedir', __CLASS__),
-			'clipboard'        => get_string('clipboard', __CLASS__),
-			'confirm_backup'   => get_string('confirm_backup', __CLASS__),
-			'confirm_userdata' => get_string('confirm_userdata', __CLASS__),
-			'confirm_delete'   => get_string('confirm_delete', __CLASS__),
-			);
-		return implode('', array_map(function ($name, $value)
-		{
-			return '<input type="hidden" name="' . $name . '"'
-			     . ' value="' . htmlspecialchars($value) . '" />';
-		},
-		array_keys($params), array_values($params)));
 	}
 }

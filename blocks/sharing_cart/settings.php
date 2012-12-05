@@ -1,4 +1,4 @@
-<?php  //$Id: settings.php 882 2012-11-01 05:06:21Z malu $
+<?php // $Id: settings.php 905 2012-12-05 05:36:52Z malu $
 
 defined('MOODLE_INTERNAL') || die();
 

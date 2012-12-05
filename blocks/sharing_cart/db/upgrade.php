@@ -1,8 +1,15 @@
-<?php
+<?php // $Id: upgrade.php 905 2012-12-05 05:36:52Z malu $/
 
+defined('MOODLE_INTERNAL') || die;
+
+/**
+ *  Sharing Cart upgrade
+ *  
+ *  @global moodle_database $DB
+ */
 function xmldb_block_sharing_cart_upgrade($oldversion = 0)
 {
-	global $CFG, $DB;
+	global $DB;
 	
 	$dbman = $DB->get_manager();
 	

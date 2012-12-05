@@ -1,6 +1,7 @@
-<?php
+<?php // $Id: block_sharing_cart.php 905 2012-12-05 05:36:52Z malu $
 
 $string['pluginname'] = 'Sharing Cart';
+$string['sharing_cart:addinstance'] = 'Add a new Sharing Cart block';
 
 $string['backup'] = 'Copy to Sharing Cart';
 $string['restore'] = 'Copy to course';
