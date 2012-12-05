@@ -2,7 +2,7 @@
  *  Sharing Cart
  *  
  *  @author  VERSION2, Inc.
- *  @version $Id: module.js 905 2012-12-05 05:36:52Z malu $
+ *  @version $Id: module.js 908 2012-12-05 08:09:10Z malu $
  */
 YUI.add('block_sharing_cart', function (Y)
 {
@@ -676,14 +676,18 @@ YUI.add('block_sharing_cart', function (Y)
             this.setStdModContent(Y.WidgetStdMod.BODY, $content, Y.WidgetStdMod.REPLACE);
             this.setStdModContent(Y.WidgetStdMod.HEADER, this.get('title'), Y.WidgetStdMod.REPLACE);
             this.after('destroyedChange', function() { this.get('notificationBase').remove(); }, this);
-            this._enterKeypress = Y.on('key', this.submit, window, 'down:13', this, 'yes');
-            this._escKeypress = Y.on('key', this.submit, window, 'down:27', this, 'cancel');
+            this._enterKeypress = Y.on('key', this.submit, window, 'down:13', this, true);
+            this._escKeypress = Y.on('key', this.submit, window, 'down:27', this, false);
             $yes.on('click', this.submit, this, 'yes');
             $no.on('click', this.submit, this, 'no');
             $cancel.on('click', this.submit, this, 'cancel');
         },
         submit: function(e, outcome)
         {
+            if (typeof outcome == "boolean") {
+                // default is "no"
+                outcome = outcome ? "no" : "cancel";
+            }
             this._enterKeypress.detach();
             this._escKeypress.detach();
             this.fire('complete', outcome);
