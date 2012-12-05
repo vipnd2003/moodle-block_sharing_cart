@@ -1,4 +1,4 @@
-<?php // $Id: settings.php 905 2012-12-05 05:36:52Z malu $
+<?php // $Id: settings.php 907 2012-12-05 06:22:45Z malu $
 
 defined('MOODLE_INTERNAL') || die();
 
@@ -26,7 +26,7 @@ $settings->add(
 		'block_sharing_cart/userdata_copyable_modtypes',
 		get_string('conf:userdata_copyable_modtypes', 'block_sharing_cart'),
 		get_string('conf:userdata_copyable_modtypes_desc', 'block_sharing_cart'),
-		array('wiki' => 1, 'forum' => 1, 'data' => 1),
+		array('data' => 1, 'forum' => 1, 'glossary' => 1, 'wiki' => 1),
 		array_reduce(
 			$DB->get_records('modules', array(), 'name ASC'),
 			function ($list, $module) use ($CFG, $OUTPUT)
