@@ -1,7 +1,14 @@
 Sharing Cart
 ============
 
-version 1.9, release 16 - 2012.12.05 (Moodle 1.9 compatibility branch)
+version 1.9, release 17 - 2013.02.13 (Moodle 1.9 compatibility branch)
+
+
+Change Log
+----------
+
+* 1.9, release 17
+  * Improvement: restore non-existing sibling's course files as target course's
 
 
 Purpose

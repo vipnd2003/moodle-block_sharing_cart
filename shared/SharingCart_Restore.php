@@ -420,10 +420,10 @@ class SharingCart_Restore extends SharingCart_BackupRestoreBase
 			);
 		}
 		
-		// 自身以外のコースファイル (TBD: ファイルのリストア先)
-		$xml = preg_replace(
-			'/'.preg_quote(parent::LINK_MISC_ESC, '/').'/',
-			$CFG->wwwroot.'/'.$file_php,
+		// 自身以外のコースファイル
+		$xml = preg_replace_callback(
+			'@(&quot;)'.preg_quote(parent::LINK_MISC_ESC, '@').'/(\d+)/(.+?)(&quot;)@',
+			array($this, 'decodeLinks_clbk_misc'),
 			$xml
 		);
 		
@@ -450,6 +450,27 @@ class SharingCart_Restore extends SharingCart_BackupRestoreBase
 		);
 		
 		return $prefix . $target . $suffix;
+	}
+	protected function decodeLinks_clbk_misc($m)
+	{
+		global $CFG;
+		
+		list ($all, $prefix, $course_id, $source, $suffix) = $m;
+		
+		$file_php = $CFG->slasharguments ? 'file.php' : 'file.php?file=';
+		
+		if (file_exists($CFG->dataroot.'/'.$course_id.'/'.$source)) {
+			// 参照先のコースファイルが存在する場合は、そのままリンクを維持
+			return $CFG->wwwroot.'/'.$file_php.'/'.$course_id.'/'.$source;
+		}
+		
+		// 参照先が存在しない場合は自身のコースファイルへコピーし、リンク書き換え
+		SharingCart_FileSystem::copy(
+			$this->getTempDir().'/'.parent::LINK_MISC_DIR.'/'.$course_id.'/'.$source,
+			$this->getTempDir().'/course_files/'.$source,
+			SharingCart_FileSystem::NEWERONLY
+		);
+		return $CFG->wwwroot.'/'.$file_php.'/'.$this->course->id.'/'.$source;
 	}
 	
 	/**

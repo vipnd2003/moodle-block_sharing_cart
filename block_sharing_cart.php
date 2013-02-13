@@ -1,4 +1,4 @@
-<?php // $Id: block_sharing_cart.php 909 2012-12-05 10:05:54Z malu $
+<?php // $Id: block_sharing_cart.php 918 2013-02-13 11:08:01Z malu $
 
 require_once dirname(__FILE__).'/plugins.php';
 require_once dirname(__FILE__).'/sharing_cart_lib.php';
@@ -7,7 +7,7 @@ class block_sharing_cart extends block_base {
 
     function init() {
         $this->title   = get_string('title', 'block_sharing_cart');
-        $this->version = 2012120500;
+        $this->version = 2013021300;
         
         sharing_cart_plugins::load();
     }
