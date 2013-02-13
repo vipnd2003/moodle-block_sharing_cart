@@ -1,7 +1,7 @@
 Sharing Cart
 ============
 
-version 2.2, release 1 patch 3 - 2012.09.11 (moodle-2.2 compatibility branch)
+version 2.2, release 1 patch 3 - 2012.09.11 (Moodle 2.2 compatibility branch)
 
 
 Purpose
