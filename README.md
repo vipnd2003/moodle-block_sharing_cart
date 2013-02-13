@@ -1,7 +1,7 @@
 Sharing Cart
 ============
 
-version 1.9, release 16 - 2012.12.05
+version 1.9, release 16 - 2012.12.05 (Moodle 1.9 compatibility branch)
 
 
 Purpose
