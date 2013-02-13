@@ -1,5 +1,5 @@
-Sharing Cart 1
-==============
+Sharing Cart
+============
 
 version 1.9, release 16 - 2012.12.05
 
@@ -19,7 +19,7 @@ serving as a library of frequently used course items available for duplication.
 Requirements
 ------------
 
-Moodle 1.9.4 or later
+Moodle 1.9.4 or later (not compatible with Moodle 2.x)
 
 
 License
