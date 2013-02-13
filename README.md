@@ -1,7 +1,7 @@
 Sharing Cart
 ============
 
-version 1.9, release 17 - 2012.12.05
+version 1.9, release 17 - 2013.02.13 (Moodle 1.9 compatibility branch)
 
 
 Change Log
@@ -26,7 +26,7 @@ serving as a library of frequently used course items available for duplication.
 Requirements
 ------------
 
-Moodle 1.9.4 or later
+Moodle 1.9.4 or later (not compatible with Moodle 2.x)
 
 
 License
