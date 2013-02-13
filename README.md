@@ -1,5 +1,5 @@
-Sharing Cart 2
-==============
+Sharing Cart
+============
 
 version 2.2, release 1 patch 3 - 2012.09.11 (moodle-2.2 compatibility branch)
 
