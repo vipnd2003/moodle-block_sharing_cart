@@ -1,7 +1,7 @@
 Sharing Cart 2
 ==============
 
-version 2.4, release 1 patch 1 - 2013.02.01
+version 2.4, release 1 patch 2 - 2013.02.13
 
 The "master" branch is no longer compatible with Moodle 2.2 or earlier.
 If you have Moodle 2.2 installed, checkout "moodle-2.2" branch instead.
@@ -10,6 +10,9 @@ If you have Moodle 2.2 installed, checkout "moodle-2.2" branch instead.
 Change Log
 ----------
 
+* 2.4, release 1 patch 2
+  * Limit applicable formats (issue #2)
+  * lib.php is no longer required
 * 2.4, release 1 patch 1
   * Set instance_can_be_docked to false
 * 2.4, release 1

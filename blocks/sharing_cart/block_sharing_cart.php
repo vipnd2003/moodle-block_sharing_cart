@@ -3,7 +3,7 @@
  *  Sharing Cart block
  *  
  *  @author  VERSION2, Inc.
- *  @version $Id: block_sharing_cart.php 911 2013-02-01 05:19:31Z malu $
+ *  @version $Id: block_sharing_cart.php 914 2013-02-13 01:01:45Z malu $
  */
 
 require_once __DIR__.'/classes/controller.php';
@@ -13,17 +13,17 @@ class block_sharing_cart extends block_base
 	public function init()
 	{
 		$this->title   = get_string('pluginname', __CLASS__);
-		$this->version = 2013020100;
+		$this->version = 2013021300;
 	}
 
 	public function applicable_formats()
 	{
-		return array('course' => true);
+		return array('course' => true, 'course-category' => false);
 	}
 
 	public function instance_can_be_docked()
 	{
-		return false;
+		return false; // AJAX won't work with Dock
 	}
 
 	public function has_config()

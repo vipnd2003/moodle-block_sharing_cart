@@ -1,4 +1,4 @@
-<?php // $Id: settings.php 907 2012-12-05 06:22:45Z malu $
+<?php // $Id: settings.php 915 2013-02-13 01:05:20Z malu $
 
 defined('MOODLE_INTERNAL') || die();
 
@@ -45,7 +45,7 @@ $settings->add(
 		'block_sharing_cart/workaround_qtypes',
 		get_string('conf:workaround_qtypes', 'block_sharing_cart'),
 		get_string('conf:workaround_qtypes_desc', 'block_sharing_cart'),
-		array('match' => 1),
+		array(),
 		array_reduce(
 			block_sharing_cart_get_real_qtypes(),
 			function ($list, $qtype) use ($CFG, $OUTPUT)
