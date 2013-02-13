@@ -1,11 +1,12 @@
-Sharing Cart 2
-==============
+Sharing Cart
+============
 
 version 2.4, release 1 patch 2 - 2013.02.13
 
 The "master" branch is no longer compatible with Moodle 2.2 or earlier.
-If you have Moodle 2.2 installed, checkout "moodle-2.2" branch instead.
 
+* Moodle 2.2 => "MOODLE_22_STABLE" branch
+* Moodle 1.9 => "MOODLE_19_STABLE" branch
 
 Change Log
 ----------
