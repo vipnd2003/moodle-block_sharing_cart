@@ -1,70 +1,41 @@
 <?php
 /**
- *  Sharing Cart
+ *  Sharing Cart - Moodle Storage Manager Wrapper
  *  
  *  @author  VERSION2, Inc.
- *  @version $Id: storage.php 778 2012-09-07 08:41:56Z malu $
+ *  @version $Id: storage.php 503 2011-07-20 07:11:19Z malu $
  */
+
 namespace sharing_cart;
 
-/**
- *  Sharing Cart file storage manager
- */
 class storage
 {
-	const COMPONENT = 'user';
-	const FILEAREA  = 'backup';
-	const ITEMID    = 0;
-	const FILEPATH  = '/';
-	
-	/** @var \file_storage */
-	private $storage;
-	/** @var \context */
-	private $context;
-	
 	/**
 	 *  Constructor
 	 *  
-	 *  @param int $userid = $USER->id
+	 *  @param int $user_id = $USER->id
 	 */
-	public function __construct($userid = null)
+	public function __construct($user_id = null)
 	{
 		$this->storage = \get_file_storage();
-		$this->context = \context_user::instance($userid ?: $GLOBALS['USER']->id);
+		$this->context = \get_context_instance(
+			CONTEXT_USER, $user_id ?: $GLOBALS['USER']->id);
 	}
 	
 	/**
-	 *  Copy a stored file into storage
-	 *  
-	 *  @param \stored_file $file
-	 */
-	public function copy_from(\stored_file $file)
-	{
-		$filerecord = (object)array(
-			'contextid' => $this->context->id,
-			'component' => self::COMPONENT,
-			'filearea'  => self::FILEAREA,
-			'itemid'    => self::ITEMID,
-			'filepath'  => self::FILEPATH,
-			);
-		$this->storage->create_file_from_storedfile($filerecord, $file);
-	}
-	
-	/**
-	 *  Get a stored_file instance by filename
+	 *  Get a file_storage instance by filename
 	 *  
 	 *  @param string $filename
-	 *  @return \stored_file
+	 *  @return file_storage
 	 */
 	public function get($filename)
 	{
-		return $this->storage->get_file($this->context->id,
-			self::COMPONENT, self::FILEAREA, self::ITEMID, self::FILEPATH,
-			$filename);
+		return $this->storage->get_file(
+			$this->context->id, 'user', 'backup', 0, '/', $filename);
 	}
 	
 	/**
-	 *  Delete a file in the storage by filename
+	 *  Delete a file in the Moodle Storage
 	 *  
 	 *  @param string $filename
 	 *  @return boolean
@@ -74,4 +45,6 @@ class storage
 		$file = $this->get($filename);
 		return $file && $file->delete();
 	}
+	
+	private $storage, $context;
 }

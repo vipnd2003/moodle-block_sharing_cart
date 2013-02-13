@@ -1,22 +1,18 @@
 <?php
 /**
- *  Sharing Cart
+ *  Sharing Cart - Record Manager
  *  
  *  @author  VERSION2, Inc.
- *  @version $Id: record.php 790 2012-09-11 09:57:28Z malu $
+ *  @version $Id: record.php 718 2012-05-08 01:35:06Z malu $
  */
+
 namespace sharing_cart;
 
 require_once __DIR__.'/exception.php';
 
-/**
- *  Sharing Cart record manager
- */
 class record
 {
 	const TABLE = 'block_sharing_cart';
-	
-	const WEIGHT_BOTTOM = 9999;
 	
 	public $id       = null;
 	public $userid   = null;
@@ -48,7 +44,6 @@ class record
 	 *  
 	 *  @param int $id
 	 *  @return record
-	 *  @throws exception
 	 */
 	public static function from_id($id)
 	{
@@ -60,35 +55,25 @@ class record
 	
 	/**
 	 *  Insert record
-	 *  
-	 *  @throws exception
 	 */
 	public function insert()
 	{
-		if (!$this->weight)
-			$this->weight = self::WEIGHT_BOTTOM;
 		$this->id = $GLOBALS['DB']->insert_record(self::TABLE, $this);
 		if (!$this->id)
 			throw new exception('record');
-		self::renumber($this->userid);
+		$this->renumber($this->userid);
 	}
-	
 	/**
 	 *  Update record
-	 *  
-	 *  @throws exception
 	 */
 	public function update()
 	{
 		if (!$GLOBALS['DB']->update_record(self::TABLE, $this))
 			throw new exception('record');
-		self::renumber($this->userid);
+		$this->renumber($this->userid);
 	}
-	
 	/**
 	 *  Delete record
-	 *  
-	 *  @throws exception
 	 */
 	public function delete()
 	{
@@ -97,14 +82,13 @@ class record
 		{
 			throw new exception('record');
 		}
-		self::renumber($this->userid);
+		$this->renumber($this->userid);
 	}
 	
 	/**
 	 *  Renumber all items sequentially
 	 *  
 	 *  @param int $user_id = $USER->id
-	 *  @throws exception
 	 */
 	public static function renumber($user_id = null)
 	{
