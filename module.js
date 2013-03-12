@@ -2,10 +2,22 @@
  *  Sharing Cart
  *  
  *  @author  VERSION2, Inc.
- *  @version $Id: module.js 908 2012-12-05 08:09:10Z malu $
+ *  @version $Id: module.js 922 2013-03-12 11:22:50Z malu $
  */
 YUI.add('block_sharing_cart', function (Y)
 {
+    if (!Array.prototype.map) {
+        // IE8 workaround
+        Array.prototype.map = function (callback, thisObject)
+        {
+            var length = this.length;
+            var result = new Array(length);
+            for (var i = 0; i < length; i++)
+                result[i] = callback.call(thisObject, this[i], i, this);
+            return result;
+        }
+    }
+
     M.block_sharing_cart = new function ()
     {
         /** @var {Object}  The icon configurations */

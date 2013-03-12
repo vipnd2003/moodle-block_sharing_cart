@@ -1,7 +1,7 @@
 Sharing Cart
 ============
 
-version 2.4, release 1 patch 2 - 2013.02.13
+version 2.4, release 1 patch 3 - 2013.03.12
 
 The "master" branch is no longer compatible with Moodle 2.2 or earlier.
 
@@ -11,6 +11,8 @@ The "master" branch is no longer compatible with Moodle 2.2 or earlier.
 Change Log
 ----------
 
+* 2.4, release 1 patch 3
+  * Bug Fix: IE8 JavaScript workaround
 * 2.4, release 1 patch 2
   * Limit applicable formats (issue #2)
   * lib.php is no longer required
