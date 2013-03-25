@@ -58,7 +58,7 @@ class renderer
 		return '
 		<li class="directory">
 			<div class="mod-indent-' . $depth . '" title="' . htmlspecialchars($path) . '">
-				<img class="activityicon iconsmall" src="' . $GLOBALS['OUTPUT']->pix_url('i/closed') . '" alt="" />
+				<img class="activityicon iconsmall" src="' . $GLOBALS['OUTPUT']->pix_url('f/folder') . '" alt="" />
 				<span class="instancename">' . htmlspecialchars(end($components)) . '</span>
 			</div>
 			<ul class="list" style="display:none;">';
