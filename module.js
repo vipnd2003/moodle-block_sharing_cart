@@ -31,8 +31,8 @@ YUI.add('block_sharing_cart', function (Y)
             'delete'  : { css: 'editing_update' , pix: 't/delete'  },
             'restore' : { css: 'editing_restore', pix: 'i/restore' },
             // directories
-            'dir-open'   : { pix: 'i/open'   },
-            'dir-closed' : { pix: 'i/closed' }
+            'dir-open'   : { pix: 'f/folder-open'   },
+            'dir-closed' : { pix: 'f/folder' }
         };
         /** @var {Object}  The shortcut to the strings */
         var str = Y.merge(M.str.moodle, M.str.block_sharing_cart);
@@ -209,7 +209,7 @@ YUI.add('block_sharing_cart', function (Y)
                         .addClass('move-' + id + '-to-' + to)
                         .set('title', str['movehere'])
                         .append(
-                            Y.Node.create('<img/>')
+                            Y.Node.create('<img class="movetarget"/>')
                                 .set('alt', str['movehere'])
                                 .set('src', M.util.image_url('movehere'))
                             );
@@ -272,7 +272,7 @@ YUI.add('block_sharing_cart', function (Y)
                 
                 var $item = $block.one('#block_sharing_cart-item-' + id);
                 
-                $clipboard = Y.Node.create('<div/>');
+                $clipboard = Y.Node.create('<div class="clipboard"/>');
                 var $cancel = create_command('cancel');
                 var $view = $item.one('div').cloneNode(true).setStyle('display', 'inline');
                 $view.one('.commands').remove();
@@ -295,7 +295,7 @@ YUI.add('block_sharing_cart', function (Y)
                         .set('href', href)
                         .set('title', str['copyhere'])
                         .append(
-                            Y.Node.create('<img/>')
+                            Y.Node.create('<img class="movetarget"/>')
                                 .set('alt', str['copyhere'])
                                 .set('src', M.util.image_url('movehere'))
                             );

@@ -58,7 +58,7 @@ class renderer
 		return '
 		<li class="directory">
 			<div class="mod-indent-' . $depth . '" title="' . htmlspecialchars($path) . '">
-				<img class="activityicon" src="' . $GLOBALS['OUTPUT']->pix_url('i/closed') . '" alt="" />
+				<img class="activityicon iconsmall" src="' . $GLOBALS['OUTPUT']->pix_url('i/closed') . '" alt="" />
 				<span class="instancename">' . htmlspecialchars(end($components)) . '</span>
 			</div>
 			<ul class="list" style="display:none;">';
@@ -114,6 +114,6 @@ class renderer
 				$src = $GLOBALS['OUTPUT']->pix_url($item->modicon);
 			}
 		}
-		return '<img class="activityicon" src="' . $src . '" alt="" />';
+		return '<img class="activityicon iconsmall" src="' . $src . '" alt="" />';
 	}
 }
