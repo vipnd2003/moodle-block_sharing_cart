@@ -1,8 +1,7 @@
-<?php // $Id: settings.php 919 2013-03-07 02:08:18Z malu $
+<?php // $Id: settings.php 934 2013-03-26 00:50:29Z malu $
 
 defined('MOODLE_INTERNAL') || die;
 
-require_once __DIR__.'/../../question/engine/bank.php';
 require_once __DIR__.'/lib/settingslib.php';
 
 if ($ADMIN->fulltree) {
