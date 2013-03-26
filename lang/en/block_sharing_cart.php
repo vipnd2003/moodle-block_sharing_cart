@@ -1,6 +1,8 @@
-<?php // $Id: block_sharing_cart.php 905 2012-12-05 05:36:52Z malu $
+<?php // $Id: block_sharing_cart.php 935 2013-03-26 01:50:13Z malu $
 
 $string['pluginname'] = 'Sharing Cart';
+$string['sharing_cart'] = $string['pluginname'];
+$string['sharing_cart_help'] = file_get_contents(__DIR__.'/help/sharing_cart.html');
 $string['sharing_cart:addinstance'] = 'Add a new Sharing Cart block';
 
 $string['backup'] = 'Copy to Sharing Cart';
@@ -43,6 +45,4 @@ $string['err:tempdir'] = 'An error occurred while creating temporary directory';
 $string['err:cleanup'] = 'An error occurred while cleaning up temporary data';
 $string['err:unsupported'] = 'Specified module does not support backup function';
 $string['err:requireajax'] = 'Sharing Cart requires AJAX';
-
-$string['sharing_cart'] = $string['pluginname'];
-$string['sharing_cart_help'] = file_get_contents(__DIR__.'/help/sharing_cart.html');
+$string['err:requirejs'] = 'Sharing Cart requires JavaScript enabled in your browser';

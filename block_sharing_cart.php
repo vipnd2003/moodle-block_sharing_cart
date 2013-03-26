@@ -3,7 +3,7 @@
  *  Sharing Cart block
  *  
  *  @author  VERSION2, Inc.
- *  @version $Id: block_sharing_cart.php 923 2013-03-12 11:24:27Z malu $
+ *  @version $Id: block_sharing_cart.php 935 2013-03-26 01:50:13Z malu $
  */
 
 require_once __DIR__.'/classes/controller.php';
@@ -57,6 +57,11 @@ class block_sharing_cart extends block_base
 		
 		if (empty($CFG->enableajax)) {
 			$html = $this->get_content_noajax();
+		} else {
+			$noscript = html_writer::tag('noscript',
+				html_writer::tag('div', get_string('err:requirejs', __CLASS__), array('class' => 'error'))
+				);
+			$html = $noscript . $html;
 		}
 		
 		$this->page->requires->js('/blocks/sharing_cart/module.js');

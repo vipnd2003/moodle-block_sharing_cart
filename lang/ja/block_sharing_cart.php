@@ -1,6 +1,8 @@
-<?php // $Id: block_sharing_cart.php 905 2012-12-05 05:36:52Z malu $
+<?php // $Id: block_sharing_cart.php 935 2013-03-26 01:50:13Z malu $
 
 $string['pluginname'] = '共有カート';
+$string['sharing_cart'] = $string['pluginname'];
+$string['sharing_cart_help'] = file_get_contents(__DIR__.'/help/sharing_cart.html');
 $string['sharing_cart:addinstance'] = '新しい共有カートブロックを追加する';
 
 $string['backup'] = '共有カートへコピー';
@@ -26,8 +28,7 @@ $string['conf:workaround_qtypes'] = 'リストア不具合対策を行う問題�
 $string['conf:workaround_qtypes_desc'] = 'チェックを付けた問題タイプに対して、リストア不具合対策を行います。
 これを有効にすると、リストアしようとしている問題と全く同じ問題が既に存在していて、
 しかしながらそのデータに破損が見つかった場合、既存データの再利用を避け、
-その問題を再度リストアするように試みます。この対策は、
-<i>error_question_match_sub_missing_in_db</i> などのエラー回避に有用です。';
+その問題を再度リストアするように試みます。この対策は、<i>error_question_match_sub_missing_in_db</i> などのエラー回避に有用です。';
 
 $string['err:invalid'] = '無効な操作です';
 $string['err:record_id'] = '不正な共有アイテムIDです';
@@ -43,7 +44,5 @@ $string['err:record'] = 'DBアクセス時にエラーが発生しました';
 $string['err:tempdir'] = '一時ディレクトリの作成に失敗しました';
 $string['err:cleanup'] = 'クリーンアップ時にエラーが発生しました';
 $string['err:unsupported'] = 'バックアップをサポートしていないモジュールです';
-$string['err:requireajax'] = 'Sharing Cart requires AJAX';
-
-$string['sharing_cart'] = $string['pluginname'];
-$string['sharing_cart_help'] = file_get_contents(__DIR__.'/help/sharing_cart.html');
+$string['err:requireajax'] = 'AJAX が有効になっていません';
+$string['err:requirejs'] = 'ブラウザの JavaScript を有効にしてください';
