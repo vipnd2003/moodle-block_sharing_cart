@@ -2,7 +2,7 @@
  *  Sharing Cart
  *  
  *  @author  VERSION2, Inc.
- *  @version $Id: module.js 922 2013-03-12 11:22:50Z malu $
+ *  @version $Id: module.js 935 2013-03-26 01:50:13Z malu $
  */
 YUI.add('block_sharing_cart', function (Y)
 {
@@ -275,6 +275,7 @@ YUI.add('block_sharing_cart', function (Y)
                 $clipboard = Y.Node.create('<div class="clipboard"/>');
                 var $cancel = create_command('cancel');
                 var $view = $item.one('div').cloneNode(true).setStyle('display', 'inline');
+                $view.set('className', $view.get('className').replace(/mod-indent-\d+/, ''));
                 $view.one('.commands').remove();
                 $cancel.on('click', this.hide, this);
                 $clipboard.append(str['clipboard'] + ":").append($view).append($cancel);
