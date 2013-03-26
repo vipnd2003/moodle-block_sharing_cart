@@ -1,7 +1,7 @@
 Sharing Cart
 ============
 
-version 2.4, release 1 patch 3 - 2013.03.12
+version 2.4, release 1 patch 4 - 2013.03.26
 
 The "master" branch is no longer compatible with Moodle 2.2 or earlier.
 
@@ -11,10 +11,15 @@ The "master" branch is no longer compatible with Moodle 2.2 or earlier.
 Change Log
 ----------
 
+* 2.4, release 1 patch 4
+  * Improve icon usage and themability for Moodle 2.4 (pull request #2)
+  * Add element's html code to clipboard div without indents (issue #5)
+  * Notify user that JavaScript is needed for Sharing Cart functionality (issue #3)
 * 2.4, release 1 patch 3
-  * Bug Fix: IE8 JavaScript workaround
+  * IE8 JavaScript workaround (CONTRIB-4209)
+  * HTML visible on settings screen (issue #1)
 * 2.4, release 1 patch 2
-  * Limit applicable formats (issue #2)
+  * Limit applicable formats (issue #2 of old repository)
   * lib.php is no longer required
 * 2.4, release 1 patch 1
   * Set instance_can_be_docked to false
