@@ -3,7 +3,7 @@
  *  Sharing Cart block
  *  
  *  @author  VERSION2, Inc.
- *  @version $Id: block_sharing_cart.php 935 2013-03-26 01:50:13Z malu $
+ *  @version $Id: block_sharing_cart.php 936 2013-03-26 03:15:09Z malu $
  */
 
 require_once __DIR__.'/classes/controller.php';
@@ -13,7 +13,7 @@ class block_sharing_cart extends block_base
 	public function init()
 	{
 		$this->title   = get_string('pluginname', __CLASS__);
-		$this->version = 2013031200;
+		$this->version = 2013032600;
 	}
 
 	public function applicable_formats()
