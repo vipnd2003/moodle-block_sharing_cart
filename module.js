@@ -2,7 +2,7 @@
  *  Sharing Cart
  *  
  *  @author  VERSION2, Inc.
- *  @version $Id: module.js 935 2013-03-26 01:50:13Z malu $
+ *  @version $Id: module.js 938 2013-03-27 07:06:39Z malu $
  */
 YUI.add('block_sharing_cart', function (Y)
 {
@@ -41,9 +41,11 @@ YUI.add('block_sharing_cart', function (Y)
         var $block = Y.Node.one('.block_sharing_cart');
 
         /** @var {Object}  The current course */
-        var course = {
-            id: $block.one('a.editing_edit').get('href').match(/\/course\/view\.php\?id=(\d+)/)[1]
-        };
+        var course = (function ()
+        {
+            var m = /\/course\/view\.php\?id=(\d+)/.exec(location.href);
+            return m ? { id: m[1] } : null;
+        })();
 
         /**
          *  Shows an error message with given Ajax error
@@ -588,6 +590,10 @@ YUI.add('block_sharing_cart', function (Y)
          */
         this.init_tree = function ()
         {
+            var actions = [ 'movedir', 'move', 'delete' ];
+            if (course)
+                actions.push('restore');
+            
             // initialize items
             $block.all('li.activity').each(function ($item)
             {
@@ -607,7 +613,7 @@ YUI.add('block_sharing_cart', function (Y)
 //                drag.on('drag:end', this.drag_end, this);
                 
                 var $commands = $item.one('.commands');
-                Y.Array.each([ 'movedir', 'move', 'delete', 'restore' ], function (action)
+                Y.Array.each(actions, function (action)
                 {
                     var $command = create_command(action);
                     $command.on('click', this['on_' + action], this);

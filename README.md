@@ -1,7 +1,7 @@
 Sharing Cart
 ============
 
-version 2.4, release 1 patch 4 - 2013.03.26
+version 2.4, release 1 patch 5 - 2013.03.27
 
 The "master" branch is no longer compatible with Moodle 2.2 or earlier.
 
@@ -11,6 +11,8 @@ The "master" branch is no longer compatible with Moodle 2.2 or earlier.
 Change Log
 ----------
 
+* 2.4, release 1 patch 5
+  * Fixed Sharing cart causing file upload box to hang (issue #3 of old repository)
 * 2.4, release 1 patch 4
   * Improve icon usage and themability for Moodle 2.4 (pull request #2)
   * Add element's html code to clipboard div without indents (issue #5)
