@@ -1,7 +1,7 @@
 Sharing Cart
 ============
 
-version 2.4, release 1 patch 5 - 2013.03.27
+version 2.4, release 1 patch 6 - 2013.03.28
 
 The "master" branch is no longer compatible with Moodle 2.2 or earlier.
 
@@ -11,6 +11,8 @@ The "master" branch is no longer compatible with Moodle 2.2 or earlier.
 Change Log
 ----------
 
+* 2.4, release 1 patch 6
+  * Add block/sharing_cart:myaddinstance capability (issue #6)
 * 2.4, release 1 patch 5
   * Fixed Sharing cart causing file upload box to hang (issue #3 of old repository)
 * 2.4, release 1 patch 4
