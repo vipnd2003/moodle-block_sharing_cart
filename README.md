@@ -13,6 +13,7 @@ Change Log
 
 * 2.4, release 1 patch 6
   * Add block/sharing_cart:myaddinstance capability (issue #6)
+  * Used wrong string from core in bulkdelete.php (issue #8)
 * 2.4, release 1 patch 5
   * Fixed Sharing cart causing file upload box to hang (issue #3 of old repository)
 * 2.4, release 1 patch 4

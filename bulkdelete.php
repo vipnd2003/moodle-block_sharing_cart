@@ -3,7 +3,7 @@
  *  Sharing Cart - Bulk Delete Operation
  *  
  *  @author  VERSION2, Inc.
- *  @version $Id: bulkdelete.php 905 2012-12-05 05:36:52Z malu $
+ *  @version $Id: bulkdelete.php 942 2013-03-28 10:42:54Z malu $
  */
 
 require_once '../../config.php';
@@ -130,7 +130,7 @@ echo $OUTPUT->header();
 		<div><label style="cursor:default;">
 			<input type="checkbox" checked="checked" onclick="check_all(this);"
 			 style="height:16px; vertical-align:middle;" />
-			<span>', get_string('checkall'), '</span>
+			<span>', get_string('selectall'), '</span>
 		</label></div>';
 		
 		$i = 0;
