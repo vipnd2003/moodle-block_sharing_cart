@@ -3,7 +3,7 @@
  *  Sharing Cart block
  *  
  *  @author  VERSION2, Inc.
- *  @version $Id: block_sharing_cart.php 941 2013-03-28 10:37:21Z malu $
+ *  @version $Id: block_sharing_cart.php 948 2013-03-28 12:14:34Z malu $
  */
 
 require_once __DIR__.'/classes/controller.php';
@@ -18,7 +18,14 @@ class block_sharing_cart extends block_base
 
 	public function applicable_formats()
 	{
-		return array('course' => true, 'course-category' => false);
+		return array(
+			'course'          => true,
+			'course-category' => false,
+			'mod'             => false,
+			'my'              => false,
+			'tag'             => false,
+			'admin'           => false,
+			);
 	}
 
 	public function instance_can_be_docked()
@@ -64,6 +71,7 @@ class block_sharing_cart extends block_base
 			$html = $noscript . $html;
 		}
 		
+		$this->page->requires->css('/blocks/sharing_cart/styles.css');
 		$this->page->requires->js('/blocks/sharing_cart/module.js');
 		$this->page->requires->yui_module('block_sharing_cart', 'M.block_sharing_cart.init', array(), null, true);
 		$this->page->requires->strings_for_js(
