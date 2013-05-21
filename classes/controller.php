@@ -216,7 +216,7 @@ class controller
 		// validate parameters and capabilities
 		$record = record::from_id($id);
 		if ($record->userid != $USER->id)
-			throw new exception('capability');
+			throw new exception('forbidden');
 		$course = $DB->get_record('course', array('id' => $courseid), '*', MUST_EXIST);
 		$section = $DB->get_record('course_sections',
 			array('course' => $course->id, 'section' => $sectionnumber), '*', MUST_EXIST);
@@ -278,7 +278,7 @@ class controller
 	{
 		$record = record::from_id($id);
 		if ($record->userid != $GLOBALS['USER']->id)
-			throw new exception('capability');
+			throw new exception('forbidden');
 		self::validate_sesskey();
 		
 		$components = array_filter(explode('/', $path), 'strlen');
@@ -300,7 +300,7 @@ class controller
 	{
 		$record = record::from_id($id);
 		if ($record->userid != $GLOBALS['USER']->id)
-			throw new exception('capability');
+			throw new exception('forbidden');
 		self::validate_sesskey();
 		
 		// get the weight of desired position
@@ -328,7 +328,7 @@ class controller
 	{
 		$record = record::from_id($id);
 		if ($record->userid != $GLOBALS['USER']->id)
-			throw new exception('capability');
+			throw new exception('forbidden');
 		self::validate_sesskey();
 		
 		$storage = new storage();
@@ -347,7 +347,7 @@ class controller
 	{
 		$tempdir = $GLOBALS['CFG']->dataroot . '/temp/backup';
 		if (!\check_dir_exists($tempdir, true, true))
-			throw new exception('tempdir');
+			throw new exception('unexpectederror');
 		return $tempdir;
 	}
 	
@@ -365,7 +365,7 @@ class controller
 		} catch (\moodle_exception $ex) {
 			unset($ex);
 		}
-		throw new exception('invalid');
+		throw new exception('invalidoperation');
 	}
 	
 	/**

@@ -1,7 +1,7 @@
 Sharing Cart
 ============
 
-version 2.4, release 1 patch 6 - 2013.03.28
+version 2.4, release 1 patch 7 - 2013.05.21
 
 The "master" branch is no longer compatible with Moodle 2.2 or earlier.
 
@@ -11,6 +11,9 @@ The "master" branch is no longer compatible with Moodle 2.2 or earlier.
 Change Log
 ----------
 
+* 2.4, release 1 patch 7
+  * Removed block/sharing_cart:myaddinstance capability (issue #6)
+  * Reduced unused strings and moved help content into lang file (issue #7)
 * 2.4, release 1 patch 6
   * Add block/sharing_cart:myaddinstance capability (issue #6)
   * Used wrong string from core in bulkdelete.php (issue #8)

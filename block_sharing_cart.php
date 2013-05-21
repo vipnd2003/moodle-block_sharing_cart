@@ -13,7 +13,7 @@ class block_sharing_cart extends block_base
 	public function init()
 	{
 		$this->title   = get_string('pluginname', __CLASS__);
-		$this->version = 2013032800;
+		$this->version = 2013052101;
 	}
 
 	public function applicable_formats()
@@ -66,7 +66,7 @@ class block_sharing_cart extends block_base
 			$html = $this->get_content_noajax();
 		} else {
 			$noscript = html_writer::tag('noscript',
-				html_writer::tag('div', get_string('err:requirejs', __CLASS__), array('class' => 'error'))
+				html_writer::tag('div', get_string('requirejs', __CLASS__), array('class' => 'error'))
 				);
 			$html = $noscript . $html;
 		}
@@ -124,7 +124,7 @@ class block_sharing_cart extends block_base
 	{
 		global $OUTPUT;
 		
-		$html = '<div class="error">' . get_string('err:requireajax', __CLASS__) . '</div>';
+		$html = '<div class="error">' . get_string('requireajax', __CLASS__) . '</div>';
 		if (has_capability('moodle/site:config', context_system::instance())) {
 			$url = new moodle_url('/admin/settings.php?section=ajax');
 			$link = '<a href="' . $url . '">' . get_string('ajaxuse') . '</a>';
