@@ -71,7 +71,6 @@ class block_sharing_cart extends block_base
 			$html = $noscript . $html;
 		}
 		
-		$this->page->requires->css('/blocks/sharing_cart/styles.css');
 		$this->page->requires->js('/blocks/sharing_cart/module.js');
 		$this->page->requires->yui_module('block_sharing_cart', 'M.block_sharing_cart.init', array(), null, true);
 		$this->page->requires->strings_for_js(
