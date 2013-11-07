@@ -1,4 +1,4 @@
-<?php // $Id: block_sharing_cart.php 947 2013-03-28 11:59:50Z malu $
+<?php
 
 $string['pluginname'] = '共有カート';
 $string['sharing_cart'] = $string['pluginname'];
@@ -34,9 +34,10 @@ $string['confirm_delete_selected'] = '選択したアイテムを全て削除し
 
 $string['settings:userdata_copyable_modtypes'] = 'ユーザーデータをコピー可能なモジュールタイプ';
 $string['settings:userdata_copyable_modtypes_desc'] = '共有カートへコピーする際、コピーしようとしているモジュールがここでチェックを付けたモジュールタイプで、
-かつ、操作しているユーザーが <strong>moodle/backup:userinfo</strong> ケイパビリティを持っていれば、
+かつ、操作しているユーザーが <strong>moodle/backup:userinfo</strong>,
+<strong>moodle/backup:anonymise</strong>, <strong>moodle/restore:userinfo</strong> ケイパビリティを持っていれば、
 そのモジュールに付随するユーザーデータをコピーに含めるかどうかを選択するダイアログを表示します。<br />
-(既定では「マネージャ」ロールのみが <strong>moodle/backup:userinfo</strong> ケイパビリティを持ちます。)';
+(既定では「マネージャ」ロールのみがこれらのケイパビリティを持ちます。)';
 $string['settings:workaround_qtypes'] = 'リストア不具合対策を行う問題タイプ';
 $string['settings:workaround_qtypes_desc'] = 'チェックを付けた問題タイプに対して、リストア不具合対策を行います。
 これを有効にすると、リストアしようとしている問題と全く同じ問題が既に存在していて、

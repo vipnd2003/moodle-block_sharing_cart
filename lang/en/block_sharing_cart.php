@@ -1,4 +1,4 @@
-<?php // $Id: block_sharing_cart.php 947 2013-03-28 11:59:50Z malu $
+<?php
 
 $string['pluginname'] = 'Sharing Cart';
 $string['sharing_cart'] = $string['pluginname'];
@@ -36,8 +36,9 @@ $string['confirm_delete_selected'] = 'Are you sure you want to delete all select
 $string['settings:userdata_copyable_modtypes'] = 'User data copyable module types';
 $string['settings:userdata_copyable_modtypes_desc'] = 'While copying an activity into the Sharing Cart,
 a dialog shows an option whether a copy of an activity includes its user data or not,
-if its module type is checked in the above and an operator has <strong>moodle/backup:userinfo</strong> capability.
-(By default, only manager role has <strong>moodle/backup:userinfo</strong> capability.)';
+if its module type is checked in the above and an operator has <strong>moodle/backup:userinfo</strong>,
+<strong>moodle/backup:anonymise</strong> and <strong>moodle/restore:userinfo</strong> capabilities.
+(By default, only manager role has those capabilities.)';
 $string['settings:workaround_qtypes'] = 'Workaround for question types';
 $string['settings:workaround_qtypes_desc'] = 'The workaround for question restore issue will be performed if its question type is checked.
 When the questions to be restored already exist, however, those data look like inconsistent,
