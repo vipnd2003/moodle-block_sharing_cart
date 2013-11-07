@@ -425,6 +425,7 @@ YUI.add('block_sharing_cart', function (Y)
                             {
                                 backup(parse_cmid(this.get('question')), false);
                             });
+                            $yesnocancel.show();
                         } else {
                             //if (confirm(str['confirm_backup']))
                             //    backup(cmid, false);
@@ -437,6 +438,7 @@ YUI.add('block_sharing_cart', function (Y)
                             {
                                 backup(parse_cmid(this.get('question')), false);
                             });
+                            $okcancel.show();
                         }
                     },
                     failure: function (tid, response) { show_error(response); }
