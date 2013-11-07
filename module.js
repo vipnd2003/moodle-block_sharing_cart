@@ -396,52 +396,55 @@ YUI.add('block_sharing_cart', function (Y)
             //var modtype = $activity.get('className').match(/modtype_(\w+)/)[1];
             var cmid = $activity.get('id').match(/(\d+)$/)[1];
             
-            Y.io(get_action_url('rest'), {
-                method: 'POST',
-                data: { 'action': 'is_userdata_copyable', 'cmid': cmid },
-                on: {
-                    success: function (tid, response)
+            (function (on_success)
+            {
+                Y.io(get_action_url('rest'), {
+                    method: 'POST',
+                    data: { 'action': 'is_userdata_copyable', 'cmid': cmid },
+                    on: {
+                        success: function (tid, response) { on_success(response); },
+                        failure: function (tid, response) { show_error(response); }
+                    }
+                });
+            })(function (response)
+            {
+                function embed_cmid(cmid)
+                {
+                    return '<!-- #cmid=' + cmid + ' -->';
+                }
+                function parse_cmid(question)
+                {
+                    return /#cmid=(\d+)/.exec(question)[1];
+                }
+                var copyable = response.responseText == '1';
+                if (copyable) {
+                    var $yesnocancel = new M.block_sharing_cart.yesnocancel({
+                        title: str['backup'],
+                        question: str['confirm_userdata'] + embed_cmid(cmid),
+                        yesLabel: str['yes'], noLabel: str['no'], cancelLabel: str['cancel']
+                    });
+                    $yesnocancel.on('complete-yes', function (e)
                     {
-                        function embed_cmid(cmid)
-                        {
-                            return '<!-- #cmid=' + cmid + ' -->';
-                        }
-                        function parse_cmid(question)
-                        {
-                            return /#cmid=(\d+)/.exec(question)[1];
-                        }
-                        var copyable = response.responseText == '1';
-                        if (copyable) {
-                            var $yesnocancel = new M.block_sharing_cart.yesnocancel({
-                                title: str['backup'],
-                                question: str['confirm_userdata'] + embed_cmid(cmid),
-                                yesLabel: str['yes'], noLabel: str['no'], cancelLabel: str['cancel']
-                            });
-                            $yesnocancel.on('complete-yes', function (e)
-                            {
-                                backup(parse_cmid(this.get('question')), true);
-                            });
-                            $yesnocancel.on('complete-no', function (e)
-                            {
-                                backup(parse_cmid(this.get('question')), false);
-                            });
-                            $yesnocancel.show();
-                        } else {
-                            //if (confirm(str['confirm_backup']))
-                            //    backup(cmid, false);
-                            var $okcancel = new M.core.confirm({
-                                title: str['backup'],
-                                question: str['confirm_backup'] + embed_cmid(cmid),
-                                yesLabel: str['ok'], noLabel: str['cancel']
-                            });
-                            $okcancel.on('complete-yes', function (e)
-                            {
-                                backup(parse_cmid(this.get('question')), false);
-                            });
-                            $okcancel.show();
-                        }
-                    },
-                    failure: function (tid, response) { show_error(response); }
+                        backup(parse_cmid(this.get('question')), true);
+                    });
+                    $yesnocancel.on('complete-no', function (e)
+                    {
+                        backup(parse_cmid(this.get('question')), false);
+                    });
+                    $yesnocancel.show();
+                } else {
+                    //if (confirm(str['confirm_backup']))
+                    //    backup(cmid, false);
+                    var $okcancel = new M.core.confirm({
+                        title: str['backup'],
+                        question: str['confirm_backup'] + embed_cmid(cmid),
+                        yesLabel: str['ok'], noLabel: str['cancel']
+                    });
+                    $okcancel.on('complete-yes', function (e)
+                    {
+                        backup(parse_cmid(this.get('question')), false);
+                    });
+                    $okcancel.show();
                 }
             });
         }
