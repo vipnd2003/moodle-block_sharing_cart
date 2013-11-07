@@ -1,7 +1,7 @@
 Sharing Cart
 ============
 
-version 2.4, release 1 patch 7 - 2013.05.21
+version 2.4, release 1 patch 8 - 2013.11.07
 
 The "master" branch is no longer compatible with Moodle 2.2 or earlier.
 
@@ -11,6 +11,8 @@ The "master" branch is no longer compatible with Moodle 2.2 or earlier.
 Change Log
 ----------
 
+* 2.4, release 1 patch 8
+  * Support Moodle 2.6
 * 2.4, release 1 patch 7
   * Removed block/sharing_cart:myaddinstance capability (issue #6)
   * Reduced unused strings and moved help content into lang file (issue #7)
