@@ -560,6 +560,7 @@ YUI.add('block_sharing_cart', function (Y)
                     failure: function (tid, response) { show_error(response); }
                 }
             });
+            e.stopPropagation();
         }
 
         /**
