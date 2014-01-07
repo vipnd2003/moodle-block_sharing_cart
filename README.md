@@ -1,7 +1,7 @@
 Sharing Cart
 ============
 
-version 2.4, release 1 patch 9 - 2013.11.08
+version 2.6, release 1 - 2014.01.07
 
 The "master" branch is no longer compatible with Moodle 2.2 or earlier.
 
@@ -11,6 +11,8 @@ The "master" branch is no longer compatible with Moodle 2.2 or earlier.
 Change Log
 ----------
 
+* 2.6, release 1
+  * Rename version number
 * 2.4, release 1 patch 9
   * Improved capability checking (issue #10)
 * 2.4, release 1 patch 8
