@@ -13,6 +13,7 @@ Change Log
 
 * 2.6, release 1 patch 1
   * Fixed issue: PHP's numeric string does not work properly
+  * Improved indentation of cart items
 * 2.6, release 1
   * Rename version number
 * 2.4, release 1 patch 9
