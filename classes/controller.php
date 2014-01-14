@@ -245,18 +245,17 @@ class controller
 		
 		// prepare the temporary directory and generate a temporary name
 		$tempdir = self::get_tempdir();
-		$tempname = time() . mt_rand();
+		$tempname = \restore_controller::get_tempdir_name($course->id, $USER->id);
 		
 		// copy the backup archive into the temporary directory
-		$temppack = \restore_controller::get_tempdir_name($course->id, $USER->id);
 		$storage = new storage();
 		$file = $storage->get($record->filename);
-		$file->copy_content_to("$tempdir/$temppack");
-		$tempfiles[] = "$tempdir/$temppack";
+		$file->copy_content_to("$tempdir/$tempname.mbz");
+		$tempfiles[] = "$tempdir/$tempname.mbz";
 		
 		// extract the archive in the temporary directory
 		$packer = new \zip_packer();
-		$packer->extract_to_pathname("$tempdir/$temppack", "$tempdir/$tempname");
+		$packer->extract_to_pathname("$tempdir/$tempname.mbz", "$tempdir/$tempname");
 		$tempfiles[] = "$tempdir/$tempname";
 		
 		// restore a module from the extracted files
