@@ -63,7 +63,7 @@ class renderer
 		$depth = count($components) - 1;
 		return '
 		<li class="directory">
-			<div class="mod-indent-' . $depth . '" title="' . htmlspecialchars($path) . '">
+			<div class="sc-indent-' . $depth . '" title="' . htmlspecialchars($path) . '">
 				<img class="activityicon iconsmall" src="' . $OUTPUT->pix_url('f/folder') . '" alt="" />
 				<span class="instancename">' . htmlspecialchars(end($components)) . '</span>
 			</div>
@@ -83,7 +83,7 @@ class renderer
 		$class = $item->modname . ' ' . "modtype_{$item->modname}";
 		return '
 				<li class="activity ' . $class . '" id="block_sharing_cart-item-' . $item->id . '">
-					<div class="mod-indent-' . $depth . '">
+					<div class="sc-indent-' . $depth . '">
 						' . self::render_modicon($item) . '
 						<span class="instancename">' . $item->modtext . '</span>
 						<span class="commands"></span>
