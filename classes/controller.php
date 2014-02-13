@@ -254,7 +254,7 @@ class controller
 		$tempfiles[] = "$tempdir/$tempname.mbz";
 		
 		// extract the archive in the temporary directory
-		$packer = new \zip_packer();
+		$packer = \get_file_packer('application/vnd.moodle.backup');
 		$packer->extract_to_pathname("$tempdir/$tempname.mbz", "$tempdir/$tempname");
 		$tempfiles[] = "$tempdir/$tempname";
 		
