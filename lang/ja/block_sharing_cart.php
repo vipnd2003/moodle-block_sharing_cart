@@ -1,7 +1,7 @@
 <?php
 
 $string['pluginname'] = '共有カート';
-$string['sharing_cart'] = $string['pluginname'];
+$string['sharing_cart'] = '共有カート';
 $string['sharing_cart_help'] = '<h2 class="helpheading">操作方法</h2>
 <dl style="margin-left:0.5em;">
 <dt>共有カートへコピー</dt>

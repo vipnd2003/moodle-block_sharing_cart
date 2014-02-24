@@ -1,7 +1,7 @@
 <?php
 
 $string['pluginname'] = 'Sharing Cart';
-$string['sharing_cart'] = $string['pluginname'];
+$string['sharing_cart'] = 'Sharing Cart';
 $string['sharing_cart_help'] = '<h2 class="helpheading">Operation</h2>
 <dl style="margin-left:0.5em;">
 <dt>Copying from course to Sharing Cart</dt>
