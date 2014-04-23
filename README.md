@@ -11,6 +11,8 @@ The "master" branch is no longer compatible with Moodle 2.2 or earlier.
 Change Log
 ----------
 
+* 2.6, release 1 patch 4
+  * Fixed issue #16
 * 2.6, release 1 patch 3
   * Fixed issue: https://tracker.moodle.org/browse/MDLSITE-2806
 * 2.6, release 1 patch 2
