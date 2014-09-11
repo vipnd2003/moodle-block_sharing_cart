@@ -19,6 +19,7 @@ class block_sharing_cart extends block_base
 	public function applicable_formats()
 	{
 		return array(
+			'site'            => true,
 			'course'          => true,
 			'course-category' => false,
 			'mod'             => false,

@@ -251,6 +251,26 @@ YUI.add('block_sharing_cart', function (Y)
         {
             var $clipboard = null, targets = [];
             
+            function create_target(id, section)
+            {
+                var href = get_action_url('restore', {
+                    'id'     : id,
+                    'course' : course.id,
+                    'section': section,
+                    'sesskey': M.cfg.sesskey
+                });
+                var $target = Y.Node.create('<a/>')
+                    .set('href', href)
+                    .set('title', str['copyhere'])
+                    .append(
+                        Y.Node.create('<img class="movetarget"/>')
+                            .set('alt', str['copyhere'])
+                            .set('src', M.util.image_url('movehere'))
+                        );
+                targets.push($target);
+                return $target;
+            }
+            
             /**
              *  Hide restore targets
              */
@@ -282,30 +302,27 @@ YUI.add('block_sharing_cart', function (Y)
                 $cancel.on('click', this.hide, this);
                 $clipboard.append(str['clipboard'] + ":").append($view).append($cancel);
                 
-                var $container = Y.Node.one('.course-content');
-                $container.insertBefore($clipboard, $container.one('*'));
-                
-                $container.all(M.course.format.get_section_wrapper(Y)).each(function ($section)
-                {
-                    var section = $section.get('id').match(/(\d+)$/)[1];
-                    var href = get_action_url('restore', {
-                        'id'     : id,
-                        'course' : course.id,
-                        'section': section,
-                        'sesskey': M.cfg.sesskey
-                    });
-                    var $target = Y.Node.create('<a/>')
-                        .set('href', href)
-                        .set('title', str['copyhere'])
-                        .append(
-                            Y.Node.create('<img class="movetarget"/>')
-                                .set('alt', str['copyhere'])
-                                .set('src', M.util.image_url('movehere'))
-                            );
-                    $section.one('ul.section').append($target);
-                    
-                    targets.push($target);
-                }, this);
+                if (course.is_frontpage) {
+                    var $sitetopic = Y.Node.one('.sitetopic');
+                    var $mainmenu = Y.Node.one('.block_site_main_menu');
+                    if ($sitetopic)
+                        $sitetopic.insertBefore($clipboard, $sitetopic.one('*'));
+                    else if ($mainmenu)
+                        $mainmenu.insertBefore($clipboard, $mainmenu.one('.content'));
+                    // mainmenu = section #0, sitetopic = section #1
+                    if ($mainmenu)
+                        $mainmenu.insertBefore(create_target(id, 0), $mainmenu.one('.footer'));
+                    if ($sitetopic)
+                        $sitetopic.one('ul.section').append(create_target(id, 1));
+                } else {
+                    var $container = Y.Node.one('.course-content');
+                    $container.insertBefore($clipboard, $container.one('*'));
+                    $container.all(M.course.format.get_section_wrapper(Y)).each(function ($section)
+                    {
+                        var section = $section.get('id').match(/(\d+)$/)[1];
+                        $section.one('ul.section').append(create_target(id, section));
+                    }, this);
+                }
             }
         }
 
