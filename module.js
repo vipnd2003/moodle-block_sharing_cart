@@ -123,7 +123,7 @@ YUI.add('block_sharing_cart', function (Y)
                     success: function (tid, response)
                     {
                         $block.one('.tree').replace(response.responseText);
-                        M.block_sharing_cart.init_tree();
+                        M.block_sharing_cart.init_item_tree();
                     },
                     failure: function (tid, response) { show_error(response); }
                 }
@@ -382,7 +382,17 @@ YUI.add('block_sharing_cart', function (Y)
                 $block.one('.header .commands').append(this);
             });
             
-            this.init_tree();
+            //this.init_item_tree();
+            //this.init_activity_commands();
+        }
+
+        /**
+         *  After M.course.init_resource_dragdrop()
+         */
+        this.after_course_init_resource_dragdrop = function ()
+        {
+            this.init_item_tree();
+            this.init_activity_commands();
         }
 
         /**
@@ -576,25 +586,10 @@ YUI.add('block_sharing_cart', function (Y)
             restore_targets.show(id);
         }
 
-//        this.drag_start = function (e)
-//        {
-//            var drag = e.target;
-//            drag.get('node').setStyles({
-//                opacity: '.25'
-//            });
-//        }
-//        this.drag_end = function (e)
-//        {
-//            var drag = e.target;
-//            drag.get('node').setStyles({
-//                opacity: '1'
-//            });
-//        }
-
         /**
          *  Initialize the Sharing Cart item tree
          */
-        this.init_tree = function ()
+        this.init_item_tree = function ()
         {
             var actions = [ 'movedir', 'move', 'delete' ];
             if (course)
@@ -603,21 +598,6 @@ YUI.add('block_sharing_cart', function (Y)
             // initialize items
             $block.all('li.activity').each(function ($item)
             {
-//                // @see /course/yui/dragdrop/dragdrop.js
-//                var drag = new Y.DD.Drag({
-//                    node: $item,
-//                    groups: [ 'block_sharing_cart' ],
-//                    target: true,
-//                    handles: [ 'img:first' ]
-//                }).plug(Y.Plugin.DDProxy, {
-//                    moveOnEnd: false
-//                }).plug(Y.Plugin.DDConstrained, {
-//                    constrain: '#page-content'
-//                }).plug(Y.Plugin.DDWinScroll);
-//                
-//                drag.on('drag:start', this.drag_start, this);
-//                drag.on('drag:end', this.drag_end, this);
-                
                 var $commands = $item.one('.commands');
                 Y.Array.each(actions, function (action)
                 {
@@ -629,17 +609,12 @@ YUI.add('block_sharing_cart', function (Y)
             
             // initialize directories
             directories.init();
-            
-//            var drop = new Y.DD.Drop({
-//                node: $block.one('ul.list'),
-//                groups: [ 'resource' ]
-//            });
         }
 
         /**
-         *  Initialize resource drag drop
+         *  Initialize activity commands
          */
-        this.init_resource_dragdrop = function ()
+        this.init_activity_commands = function ()
         {
             var $sections = Y.Node.all('.course-content ' + M.course.format.get_section_wrapper(Y));
             $sections.each(function ($section)
@@ -657,25 +632,6 @@ YUI.add('block_sharing_cart', function (Y)
                         $activity.one('.commands').append($backup);
                     }
                     $backup.on('click', this.on_backup, this);
-                    
-//                    var drag = Y.DD.DDM.getDrag($activity);
-//                    var drop_hit = drag.getEvent('drag:drophit');
-//                    
-//                    var drag = new Y.DD.Drag({
-//                        node: $activity.one('*'),
-//                        groups: [ 'block_sharing_cart' ],
-//                        target: true,
-//                        handles: [ '.commands ' + css.backup ]
-//                    }).plug(Y.Plugin.DDProxy, {
-//                        moveOnEnd: false
-//                    }).plug(Y.Plugin.DDConstrained, {
-//                        constrain: '#page-content'
-//                    }).plug(Y.Plugin.DDWinScroll);
-//                    
-//                    drag.on('drag:start', this.drag_start, this);
-//                    drag.on('drag:end', this.drag_end, this);
-//                    
-//                    $icon.setStyle('cursor', 'move');
                 }, this);
             }, this);
         }
@@ -743,17 +699,17 @@ YUI.add('block_sharing_cart', function (Y)
     M.block_sharing_cart.yesnocancel = YESNOCANCEL;
 
 
-    // install a hook to M.course.init_resource_dragdrop()
-    // so that block_sharing_cart can get DD-ready activity elements
+    // do any initializations after the M.course.init_resource_dragdrop()
+    // to prevent the Sharing Cart items from being modified for dragdrop.
     var M_course_init_resource_dragdrop = M.course.init_resource_dragdrop;
     M.course.init_resource_dragdrop = function ()
     {
         M_course_init_resource_dragdrop.apply(M.course, arguments);
         
-        M.block_sharing_cart.init_resource_dragdrop.call(M.block_sharing_cart);
+        M.block_sharing_cart.after_course_init_resource_dragdrop.call(M.block_sharing_cart);
     }
 },
-'2.6, release 1 patch 4',
+'2.6, release 1 patch 5',
 {
     requires: [ 'base', 'node', 'io', 'dom', 'cookie', 'dd', 'moodle-course-dragdrop' ]
 });
