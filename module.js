@@ -25,7 +25,7 @@ YUI.add('block_sharing_cart', function (Y)
             // actions
             'backup'  : { css: 'editing_backup' , pix: 'i/backup'  },
             'movedir' : { css: 'editing_right'  , pix: 't/right'   },
-            'move'    : { css: 'editing_move'   , pix: 't/move'    },
+            'move'    : { css: 'editing_move_'  , pix: 't/move'    },
             'edit'    : { css: 'editing_update' , pix: 't/edit'    },
             'cancel'  : { css: 'editing_cancel' , pix: 't/delete'  },
             'delete'  : { css: 'editing_update' , pix: 't/delete'  },
@@ -41,11 +41,11 @@ YUI.add('block_sharing_cart', function (Y)
         var $block = Y.Node.one('.block_sharing_cart');
 
         /** @var {Object}  The current course */
-        var course = (function ()
+        var course = new function ()
         {
-            var m = /\/course\/view\.php\?id=(\d+)/.exec(location.href);
-            return m ? { id: m[1] } : null;
-        })();
+            this.id = Y.Node.one('body').get('className').match(/course-(\d+)/)[1];
+            this.is_frontpage = Y.Node.one('body').hasClass('pagelayout-frontpage');
+        }
 
         /**
          *  Shows an error message with given Ajax error
@@ -382,15 +382,6 @@ YUI.add('block_sharing_cart', function (Y)
                 $block.one('.header .commands').append(this);
             });
             
-            //this.init_item_tree();
-            //this.init_activity_commands();
-        }
-
-        /**
-         *  After M.course.init_resource_dragdrop()
-         */
-        this.after_course_init_resource_dragdrop = function ()
-        {
             this.init_item_tree();
             this.init_activity_commands();
         }
@@ -697,17 +688,6 @@ YUI.add('block_sharing_cart', function (Y)
     Y.augment(YESNOCANCEL, Y.EventTarget);
 
     M.block_sharing_cart.yesnocancel = YESNOCANCEL;
-
-
-    // do any initializations after the M.course.init_resource_dragdrop()
-    // to prevent the Sharing Cart items from being modified for dragdrop.
-    var M_course_init_resource_dragdrop = M.course.init_resource_dragdrop;
-    M.course.init_resource_dragdrop = function ()
-    {
-        M_course_init_resource_dragdrop.apply(M.course, arguments);
-        
-        M.block_sharing_cart.after_course_init_resource_dragdrop.call(M.block_sharing_cart);
-    }
 },
 '2.6, release 1 patch 5',
 {
