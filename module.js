@@ -138,8 +138,9 @@ YUI.add('block_sharing_cart', function (Y)
          */
         function backup(cmid, userdata)
         {
-            var $activity = Y.Node.one('#module-' + cmid);
-            var $spinner = M.util.add_spinner(Y, $activity.one('.commands'));
+            var $commands = Y.Node.one('#module-' + cmid + ' .commands') ||
+                            Y.Node.one('[data-owner="#module-' + cmid + '"]');
+            var $spinner = M.util.add_spinner(Y, $commands);
             Y.io(get_action_url('rest'), {
                 method: 'POST',
                 data: { 'action': 'backup', 'cmid': cmid, 'userdata': userdata, 'sesskey': M.cfg.sesskey },
@@ -410,9 +411,17 @@ YUI.add('block_sharing_cart', function (Y)
          */
         this.on_backup = function (e)
         {
-            var $activity = e.target.ancestor('li.activity');
-            //var modtype = $activity.get('className').match(/modtype_(\w+)/)[1];
-            var cmid = $activity.get('id').match(/(\d+)$/)[1];
+            var cmid = (function ($backup)
+            {
+                var $activity = $backup.ancestor('li.activity');
+                if ($activity)
+                    return $activity.get('id').match(/(\d+)$/)[1];
+                var $commands = $backup.ancestor('.commands');
+                var dataowner = $commands.get('data-owner');
+                if (dataowner)
+                    return dataowner.match(/(\d+)$/)[1];
+                return $commands.one('a.editing_delete').get('href').match(/delete=(\d+)/)[1];
+            })(e.target);
             
             (function (on_success)
             {
@@ -624,24 +633,26 @@ YUI.add('block_sharing_cart', function (Y)
          */
         this.init_activity_commands = function ()
         {
-            var $sections = Y.Node.all('.course-content ' + M.course.format.get_section_wrapper(Y));
-            $sections.each(function ($section)
+            function add_backup_command($activity)
             {
-                $section.all('li.activity').each(function ($activity)
-                {
-                    var $backup = create_command('backup');
-                    var $menu = $activity.one('ul[role="menu"]');
-                    if ($menu) {
-                        $menu.append(Y.Node.create('<li role="presentation"/>').append($backup.set('role', 'menuitem')));
-                        if ($menu.getStyle('display') == 'none') {
-                            $backup.append($backup.get('title'));
-                        }
-                    } else {
-                        $activity.one('.commands').append($backup);
+                var $backup = create_command('backup');
+                var $menu = $activity.one('ul[role="menu"]');
+                if ($menu) {
+                    $menu.append(Y.Node.create('<li role="presentation"/>').append($backup.set('role', 'menuitem')));
+                    if ($menu.getStyle('display') == 'none') {
+                        $backup.append($backup.get('title'));
                     }
-                    $backup.on('click', this.on_backup, this);
-                }, this);
-            }, this);
+                } else {
+                    $activity.one('.commands').append($backup);
+                }
+                $backup.on('click', this.on_backup, this);
+            }
+            if (course.is_frontpage) {
+                Y.Node.all('.sitetopic li.activity').each(add_backup_command, this);
+                Y.Node.all('.block_site_main_menu .content > ul > li').each(add_backup_command, this);
+            } else {
+                Y.Node.all('.course-content li.activity').each(add_backup_command, this);
+            }
         }
     }
 
@@ -706,7 +717,7 @@ YUI.add('block_sharing_cart', function (Y)
 
     M.block_sharing_cart.yesnocancel = YESNOCANCEL;
 },
-'2.6, release 1 patch 5',
+'2.6, release 1 patch 6',
 {
     requires: [ 'base', 'node', 'io', 'dom', 'cookie', 'dd', 'moodle-course-dragdrop' ]
 });
