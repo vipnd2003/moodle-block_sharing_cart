@@ -730,7 +730,7 @@ YUI.add('block_sharing_cart', function (Y)
 
     M.block_sharing_cart.yesnocancel = YESNOCANCEL;
 },
-'2.6, release 1 patch 6',
+'2.6, release 1 patch 7',
 {
     requires: [ 'base', 'node', 'io', 'dom', 'cookie', 'dd', 'moodle-course-dragdrop' ]
 });
