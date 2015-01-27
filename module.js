@@ -640,7 +640,10 @@ YUI.add('block_sharing_cart', function (Y)
                 if ($menu) {
                     $menu.append(Y.Node.create('<li role="presentation"/>').append($backup.set('role', 'menuitem')));
                     if ($menu.getStyle('display') == 'none') {
-                        $backup.append($backup.get('title'));
+                        $backup.append(Y.Node.create('<span class="menu-action-text"/>').append($backup.get('title')));
+                    }
+                    if ($menu.one('i.fa')) { // Essential theme
+                        $backup.one('img').replace(Y.Node.create('<i class="fa fa-cloud-download icon"/>'));
                     }
                 } else {
                     $activity.one('.commands').append($backup);
