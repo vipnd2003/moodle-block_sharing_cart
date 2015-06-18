@@ -135,8 +135,8 @@ class controller
 		// generate a filename from the module info
 		$modtext = $cm->modname == 'label' ? self::get_cm_intro($cm) : $cm->name;
 		$cleanname = \clean_filename(strip_tags($modtext));
-		if (\textlib::strlen($cleanname) > self::MAX_FILENAME)
-			$cleanname = \textlib::substr($cleanname, 0, self::MAX_FILENAME) . '_';
+		if (\core_text::strlen($cleanname) > self::MAX_FILENAME)
+            		$cleanname = \core_text::substr($cleanname, 0, self::MAX_FILENAME) . '_';
 		$filename = sprintf('%s-%s.mbz', $cleanname, date('Ymd-His'));
 		
 		// backup the module into the predefined area
